@@ -3,7 +3,7 @@ const { signToken } = require('../utils/auth');
 module.exports = {
     Query: {
         me: async (parents, args, config, info) => {
-            const user = await User.findOne({ args });
+            const user = await User.findOne(args);
             return user;
         },
     },
