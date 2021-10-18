@@ -23,6 +23,7 @@ input UserInput {
 }
 
 input BookInput {
+    userId: ID!
     bookId: ID!
     authors: [String]!
     description: String!

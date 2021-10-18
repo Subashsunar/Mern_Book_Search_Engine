@@ -21,6 +21,10 @@ app.use(routes);
 
 db.once('open', async () => {
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({
+    playground: true,
+    app ,
+    path: "/api/graphql",
+});
   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
 });
