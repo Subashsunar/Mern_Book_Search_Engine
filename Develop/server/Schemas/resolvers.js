@@ -30,9 +30,11 @@ module.exports = {
               );
             return updatedUser;
         },
-        removeBook: async (parents, { bookId, _id }, config, info) => {
+        removeBook: async (parents, { bookId, token }, config, info) => {
+            
+            const userData = getDataFromToke(token);
             const updatedUser = await User.findOneAndUpdate(
-                { _id: _id },
+                { _id: userData._id },
                 { $pull: { savedBooks: { bookId } } },
                 { new: true }
               );

@@ -10,7 +10,7 @@ type Mutation {
     login(user: UserInput): Auth
     addUser(user: UserInput): Auth
     saveBook(book: BookInput): User
-    removeBook(bookId: ID!, _id: ID!): User
+    removeBook(bookId: ID!, token: String!): User
 }
 
 input UserInput {
