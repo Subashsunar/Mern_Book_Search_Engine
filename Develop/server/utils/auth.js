@@ -31,6 +31,13 @@ module.exports = {
     // send to next endpoint
     next();
   },
+
+  getDataFromToke: function (token){
+    token = token.split(' ').pop().trim();
+    const { data } = jwt.verify(token, secret, { maxAge: expiration });
+    return data;
+  },
+  
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
 

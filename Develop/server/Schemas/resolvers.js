@@ -1,9 +1,12 @@
 const User = require('../models/User');
-const { signToken } = require('../utils/auth');
+const { signToken, getDataFromToke } = require('../utils/auth');
 module.exports = {
     Query: {
-        me: async (parents, args, config, info) => {
-            const user = await User.findOne(args);
+        me: async (parents, { token }, config, info) => {
+            const userData = getDataFromToke(token);
+            const user = await User.findOne({
+                $or: [{ _id: userData ? userData._id : null }, { username: userData.username }],
+              });
             return user;
         },
     },
