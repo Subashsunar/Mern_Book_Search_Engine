@@ -22,9 +22,11 @@ module.exports = {
             const token = signToken(createdUser);
             return { user: createdUser, token };
         },
-        saveBook: async (parents, { book }, config, info) => {
+        saveBook: async (parents, { book, token }, config, info) => {
+
+            const userData = getDataFromToke(token);
             const updatedUser = await User.findOneAndUpdate(
-                { _id: book.userId },
+                { _id: userData._id },
                 { $addToSet: { savedBooks: book } },
                 { new: true, runValidators: true }
               );
